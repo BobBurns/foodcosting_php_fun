@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Login</title><link rel='stylesheet' href='styles.css' type='text/css'>
+  <script>
+    function validate(form)
+    {
+      fail  = validateFirstname(form.firstname.value)
+      fail += validateLastname(form.lastname.value)
+      fail += validateUsername(form.username.value)
+      fail += validatePassword(form.password.value)
+      fail += validateEmail(form.email.value)
+
+      if (fail == "") return true
+      else { alert(fail); return false }
+    }
+    function validateFirstname(field)
+    {
+      return (field == "") ? "No First name entered.\n" : ""
+    }
+
+    function validateLastname(field)
+    {
+      return (field == "") ? "No Last name entered.\n" : ""
+    }
+
+    function validateUsername(field)
+    {
+      if (field == "") return "No Username was entered.\n"
+      else if (field.length < 5)
+        return "Username must be at least 5 characters.\n"
+      else if (/[^a-zA-Z0-9_-]/.test(field))
+        return "Only a-z, A-Z, 0-9, - and _ allowed in Usernames.\n"
+      return ""
+    }
+
+    function validatePassword(field)
+    {
+      if (field == "") return "No password entered.\n"
+      else if (field.length < 0)
+        return "Password must be at least 6 characters.\n"
+      else if (!/[a-z]/.test(field) || !/[A-Z]/.test(field) || ![0-9].test(field))
+        return "Passwords require one each of a-z, A-Z, and 0-9.\n"
+      return ""
+    }
+
+    function validateEmail(field)
+    {
+      if (field == "") return "No Email was entered.\n"
+      else if (!((field.indexOf(".") > 0) && (field.indexOf("@") > 0)) || /[^a-zA-Z0-9.@_-]/.test(field))
+          return "The Email address is invalid.\n"
+      return ""
+    }
+  </script> 
+  </head>
+  <body>
+  <div id="header">
+  <h1>Food Tools</h1>
+  </div>
+
+  <div id="nav">
+  <ul> 
+    <li><a href="index.php">Home</a></li>
+    <li><a href="ingredient_update.php">Ingredient</a></li>
+    <li><a href="recipe_index.php">Recipe</a></li>
+    <li><a href="index.php">Menu</a></li>
+  </ul>
+  </div>
+
+  <b><p style="text-align:center;font-size:20px">Welcome to Food Tools. Please signup to create a database.</p></b>
+  <div style="margin-left:30px">
+  <form action="index.php" action="post" onsubmit="return validate(this)"><pre>
+First Name: <input type="text" maxlength="32" name="firstname">
+ Last Name: <input type="text" maxlength="32" name="lastname">
+  Username: <input type="text" maxlength="16" name="username">
+  Password: <input type="password" maxlength="12" name="password">
+     Email: <input type="text" maxlength="32" name="email">
+            <input type="submit" value="Signup">
+  </form></pre>
+  </div>
+ </body>
+</html>
